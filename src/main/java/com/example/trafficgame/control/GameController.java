@@ -3,6 +3,7 @@ package com.example.trafficgame.control;
 import com.example.trafficgame.model.Direction;
 import com.example.trafficgame.model.GameRules;
 import com.example.trafficgame.model.GameWorld;
+import com.example.trafficgame.view.ConsoleColors;
 import com.example.trafficgame.view.GameRenderer;
 
 import java.util.Scanner;
@@ -34,16 +35,7 @@ public class GameController {
         }
 
         running = false;
-        System.out.println();
-        System.out.println("GAME OVER");
-
-        switch (world.getGameOverReason()) {
-            case WIN -> System.out.println("You won! You survived all cycles!");
-            case COLLISION -> System.out.println("You lost! A collision happened!");
-            case TRAFFIC_JAM -> System.out.println("You lost! A traffic jam happened!");
-        }
-
-        System.out.println("Cycles survived: " + world.getGameTicks());
+        showGameOver();
     }
 
     private void listenForInput() {
@@ -70,5 +62,17 @@ public class GameController {
         } catch (NumberFormatException e) {
             System.out.println("Wrong input!");
         }
+    }
+
+    private void showGameOver() {
+        System.out.println("\nGAME OVER");
+
+        switch (world.getGameOverReason()) {
+            case WIN -> System.out.println(ConsoleColors.GREEN + "You won! You survived all cycles!" + ConsoleColors.RESET);
+            case COLLISION -> System.out.println(ConsoleColors.RED + "You lost! A collision happened!" + ConsoleColors.RESET);
+            case TRAFFIC_JAM -> System.out.println(ConsoleColors.RED + "You lost! A traffic jam happened!" + ConsoleColors.RESET);
+        }
+
+        System.out.println("Cycles survived: " + world.getGameTicks());
     }
 }

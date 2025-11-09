@@ -28,7 +28,7 @@ public class GameRenderer {
         }
 
         System.out.println();
-        System.out.println("Control traffic lights (1-" + world.getLanes().size() + ") or q - quit\n");
+        System.out.println("Control traffic lights (1-" + world.getLanes().size() + ") or q to quit\n");
     }
 
     private String colorString(LightColor color) {

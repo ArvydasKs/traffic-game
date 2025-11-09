@@ -36,6 +36,7 @@ public class GameWorld {
     }
 
     public void update() {
+        gameTicks++;
         for (Lane lane : lanes) {
             lane.update();
         }
@@ -88,8 +89,6 @@ public class GameWorld {
             gameOver = true;
             return;
         }
-
-        gameTicks++;
 
         if (gameTicks >= GameRules.winTicks) {
             gameOverReason = GameOverReason.WIN;
