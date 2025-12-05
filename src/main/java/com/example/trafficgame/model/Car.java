@@ -1,19 +1,16 @@
 package com.example.trafficgame.model;
 
-public class Car {
+public abstract class Car {
     private final Direction direction;
 
-    public Car(Direction direction) {
+    protected Car(Direction direction) {
         this.direction = direction;
     }
 
-    @Override
-    public String toString() {
-        return switch (direction) {
-            case NORTH -> "↑";
-            case SOUTH -> "↓";
-            case EAST -> "→";
-            case WEST -> "←";
-        };
+    public Direction getDirection() {
+        return direction;
     }
+
+    @Override
+    public abstract String toString();
 }

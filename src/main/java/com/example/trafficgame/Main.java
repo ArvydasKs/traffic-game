@@ -6,8 +6,10 @@ import com.example.trafficgame.model.GameWorld;
 import com.example.trafficgame.view.GameRenderer;
 
 public class Main {
+    private static final int numberOfLanes = GameRules.getNumberOfLanes();
+
     public static void main(String[] args) {
-        if (GameRules.numberOfLanes < 2 || GameRules.numberOfLanes > 4) {
+        if (numberOfLanes < 2 || numberOfLanes > 4) {
             System.out.println("The number of lanes must be between 2 and 4");
             return;
         }

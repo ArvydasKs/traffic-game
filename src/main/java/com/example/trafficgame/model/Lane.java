@@ -12,7 +12,7 @@ public class Lane {
 
     public Lane(Direction direction) {
         this.direction = direction;
-        this.trafficLight = new SimpleTrafficLight();
+        this.trafficLight = TrafficLightFactory.create(GameRules.getUseSimpleTrafficLights());
     }
 
     public Direction getDirection() {

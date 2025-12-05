@@ -14,13 +14,13 @@ public class GameWorld {
 
     public GameWorld() {
         Direction[] directions = Direction.values();
-        for (int i = 0; i < GameRules.numberOfLanes; i++) {
+        for (int i = 0; i < GameRules.getNumberOfLanes(); i++) {
             lanes.add(new Lane(directions[i]));
         }
     }
 
     public List<Lane> getLanes() {
-        return lanes;
+        return new ArrayList<>(lanes);
     }
 
     public boolean isGameOver() {
@@ -47,8 +47,9 @@ public class GameWorld {
 
     private void spawnCars() {
         for (Lane lane : lanes) {
-            if (random.nextDouble() < GameRules.spawnProbability) {
-                lane.addCar(new Car(lane.getDirection()));
+            if (random.nextDouble() < GameRules.getSpawnProbability()) {
+                Car car = CarFactory.create(lane.getDirection());
+                lane.addCar(car);
             }
         }
     }
@@ -77,7 +78,7 @@ public class GameWorld {
 
     public void checkGameOver() {
         for (Lane lane : lanes) {
-            if (lane.getQueueSize() > GameRules.maxCars) {
+            if (lane.getQueueSize() > GameRules.getMaxCars()) {
                 gameOverReason = GameOverReason.TRAFFIC_JAM;
                 gameOver = true;
                 return;
@@ -90,7 +91,7 @@ public class GameWorld {
             return;
         }
 
-        if (gameTicks >= GameRules.winTicks) {
+        if (gameTicks >= GameRules.getWinTicks()) {
             gameOverReason = GameOverReason.WIN;
             gameOver = true;
         }

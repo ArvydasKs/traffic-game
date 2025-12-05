@@ -1,6 +1,9 @@
 package com.example.trafficgame.control;
 
-import com.example.trafficgame.model.Direction;
+import com.example.trafficgame.control.commands.ChangeLightCommand;
+import com.example.trafficgame.control.commands.Command;
+import com.example.trafficgame.control.commands.InvalidCommand;
+import com.example.trafficgame.control.commands.QuitCommand;
 import com.example.trafficgame.model.GameRules;
 import com.example.trafficgame.model.GameWorld;
 import com.example.trafficgame.view.ConsoleColors;
@@ -28,7 +31,7 @@ public class GameController {
             renderer.render(world);
 
             try {
-                Thread.sleep(GameRules.gameSpeedMs);
+                Thread.sleep(GameRules.getGameSpeedMs());
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -38,30 +41,30 @@ public class GameController {
         showGameOver();
     }
 
+    private Command createCommand(String input) {
+        if (input.equals("Q")) {
+            return new QuitCommand(this);
+        }
+
+        try {
+            int laneIndex = Integer.parseInt(input) - 1;
+            return new ChangeLightCommand(world, laneIndex);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand();
+        }
+    }
+
     private void listenForInput() {
         while (running && !world.isGameOver()) {
             String input = scanner.nextLine().trim().toUpperCase();
 
-            if (input.equals("Q")) {
-                running = false;
-                break;
-            }
-
-            processInput(input);
+            Command command = createCommand(input);
+            command.execute();
         }
     }
 
-    private void processInput(String input) {
-        try {
-            int laneIndex = Integer.parseInt(input) - 1;
-
-            if (laneIndex >= 0 && laneIndex < world.getLanes().size()) {
-                Direction direction = world.getLanes().get(laneIndex).getDirection();
-                world.changeLight(direction);
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Wrong input!");
-        }
+    public void stopRunning() {
+        running = false;
     }
 
     private void showGameOver() {
