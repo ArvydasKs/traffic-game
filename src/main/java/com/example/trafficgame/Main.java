@@ -9,7 +9,7 @@ public class Main {
     private static final int numberOfLanes = GameRules.getNumberOfLanes();
 
     public static void main(String[] args) {
-        if (numberOfLanes < 2 || numberOfLanes > 4) {
+        if (!checkForLanes()) {
             System.out.println("The number of lanes must be between 2 and 4");
             return;
         }
@@ -19,5 +19,9 @@ public class Main {
         GameController controller = new GameController(world, renderer);
 
         controller.start();
+    }
+
+    private static boolean checkForLanes() {
+        return Main.numberOfLanes >= 2 && Main.numberOfLanes <= 4;
     }
 }

@@ -6,6 +6,11 @@ public class EmergencyCar extends Car {
     }
 
     @Override
+    public boolean canMoveOn(LightColor lightColor) {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "✚";
     }

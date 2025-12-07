@@ -11,6 +11,10 @@ public abstract class Car {
         return direction;
     }
 
+    public boolean canMoveOn(LightColor lightColor) {
+        return lightColor == LightColor.GREEN;
+    }
+
     @Override
     public abstract String toString();
 }

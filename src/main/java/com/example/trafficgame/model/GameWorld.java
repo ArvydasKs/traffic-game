@@ -58,8 +58,7 @@ public class GameWorld {
         int activeLanes = 0;
 
         for (Lane lane : lanes) {
-            if (lane.getTrafficLight().getColor() == LightColor.GREEN &&
-                    lane.getQueueSize() > 0) {
+            if (lane.willMoveThisTick()) {
                 activeLanes++;
             }
         }

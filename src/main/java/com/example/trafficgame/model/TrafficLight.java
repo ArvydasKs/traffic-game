@@ -11,5 +11,9 @@ public abstract class TrafficLight {
         this.color = color;
     }
 
+    public void forceColorForTest(LightColor color) {
+        this.color = color;
+    }
+
     public abstract void nextPhase();
 }

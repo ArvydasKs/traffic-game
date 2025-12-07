@@ -36,8 +36,20 @@ public class Lane {
     }
 
     public void update() {
-        if (trafficLight.getColor() == LightColor.GREEN && !cars.isEmpty()) {
+        if (cars.isEmpty()) return;
+
+        Car frontCar = cars.peek();
+
+        if (frontCar.canMoveOn(trafficLight.getColor())) {
             cars.poll();
         }
+    }
+
+    public boolean willMoveThisTick() {
+        if (cars.isEmpty()) return false;
+
+        Car frontCar = cars.peek();
+
+        return frontCar.canMoveOn(trafficLight.getColor());
     }
 }

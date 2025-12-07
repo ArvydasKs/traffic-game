@@ -22,6 +22,10 @@ public class GameController {
         this.renderer = renderer;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
     public void start() {
         Thread inputThread = new Thread(this::listenForInput);
         inputThread.start();
@@ -41,7 +45,9 @@ public class GameController {
         showGameOver();
     }
 
-    private Command createCommand(String input) {
+    public Command createCommand(String input) {
+        input = input.trim().toUpperCase();
+
         if (input.equals("Q")) {
             return new QuitCommand(this);
         }
@@ -56,7 +62,7 @@ public class GameController {
 
     private void listenForInput() {
         while (running && !world.isGameOver()) {
-            String input = scanner.nextLine().trim().toUpperCase();
+            String input = scanner.nextLine();
 
             Command command = createCommand(input);
             command.execute();
