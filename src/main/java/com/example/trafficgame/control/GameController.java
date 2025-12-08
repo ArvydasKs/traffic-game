@@ -77,9 +77,9 @@ public class GameController {
         System.out.println("\nGAME OVER");
 
         switch (world.getGameOverReason()) {
-            case WIN -> System.out.println(ConsoleColors.GREEN + "You won! You survived all cycles!" + ConsoleColors.RESET);
-            case COLLISION -> System.out.println(ConsoleColors.RED + "You lost! A collision happened!" + ConsoleColors.RESET);
-            case TRAFFIC_JAM -> System.out.println(ConsoleColors.RED + "You lost! A traffic jam happened!" + ConsoleColors.RESET);
+            case WIN -> System.out.println(ConsoleColors.getGreen() + "You won! You survived all cycles!" + ConsoleColors.getReset());
+            case COLLISION -> System.out.println(ConsoleColors.getRed() + "You lost! A collision happened!" + ConsoleColors.getReset());
+            case TRAFFIC_JAM -> System.out.println(ConsoleColors.getRed() + "You lost! A traffic jam happened!" + ConsoleColors.getReset());
         }
 
         System.out.println("Cycles survived: " + world.getGameTicks());

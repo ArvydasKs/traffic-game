@@ -33,9 +33,9 @@ public class GameRenderer {
 
     private String colorString(LightColor color) {
         return switch (color) {
-            case RED -> ConsoleColors.RED + "RED" + ConsoleColors.RESET;
-            case GREEN -> ConsoleColors.GREEN + "GREEN" + ConsoleColors.RESET;
-            case YELLOW -> ConsoleColors.YELLOW + "YELLOW" + ConsoleColors.RESET;
+            case RED -> ConsoleColors.getRed() + "RED" + ConsoleColors.getReset();
+            case GREEN -> ConsoleColors.getGreen() + "GREEN" + ConsoleColors.getReset();
+            case YELLOW -> ConsoleColors.getYellow() + "YELLOW" + ConsoleColors.getReset();
         };
     }
 
